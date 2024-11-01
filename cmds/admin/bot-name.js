@@ -23,6 +23,7 @@ module.exports = {
                 ephemeral: true
             }).catch(e => {});
         }
+        client.info(`${interaction.user.tag} (${interaction.user.id}) => /bot-name`)
 
         const newName = interaction.options.getString("nom");
 

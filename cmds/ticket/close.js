@@ -5,6 +5,7 @@ module.exports = {
     description: 'Ferme le ticket',
     go: async (client, db, config, interaction, args) => {
         try {
+            client.info(`${interaction.user.tag} (${interaction.user.id}) => /close`)
             if (!interaction.channel.topic) {
                 return interaction.reply({ content: "Ce n'est pas un salon de ticket.", ephemeral: true });
             }
@@ -66,7 +67,7 @@ module.exports = {
                 await interaction.channel.delete();
             }
         } catch (error) {
-            console.log('Une erreur est survenue lors de l\'exécution de la commande /close :', error);
+            client.error(error);
             interaction.reply({ content: "Une erreur s'est produite lors de la fermeture du ticket.", ephemeral: true });
         }
     },

@@ -66,7 +66,7 @@ module.exports = {
             });
 
         } catch (error) {
-            console.log('Une erreur est survenue lors de l\'exécution de la commande ticket :', error);
+            client.error(error);
         }
     }
 };

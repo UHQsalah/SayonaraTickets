@@ -1,9 +1,8 @@
-
 const
     { readdirSync } = require("fs"),
     appRoot = require('app-root-path').path;
 const go = async (client, db, config) => {
-    client.rest.on('rateLimited', (info) => console.log(`[BOT] => Rate Limited:`, info.timeToReset / 1000));
+    client.rest.on('rateLimited', (info) => client.warn(`[BOT] => Rate Limited:`, info.timeToReset / 1000));
 
     let count = 0;
     const dir = `${appRoot}/events`;
@@ -27,7 +26,7 @@ const go = async (client, db, config) => {
                 cmd.class = dirs;
 
                 if (!cmd.name) {
-                    console.log(`[BOT] => Chargement impossible {${dir}/${dirs}/${file}}`)
+                    client.error(`- [BOT] => Chargement impossible {${dir}/${dirs}/${file}}`)
                     continue;
                 } else {
                     switch (cmd.type) {
@@ -54,6 +53,7 @@ const go = async (client, db, config) => {
                             }
                         })
                     };
+                    client.success(cmd.name, 'OK')
                     client.cmds.set(cmd.name, cmd);
                     allCommands.push(cmd)
                 }
@@ -62,10 +62,10 @@ const go = async (client, db, config) => {
 
         client.on("ready", async () => {
             await client.application.commands.set(allCommands);
-            console.log(`[B0T] => ${client.cmds.size} Slash Command${client.cmds.size <= 1 ? "" : "s"} ont été chargé !`);
+            client.success(`[B0T] => ${client.cmds.size} Slash Command${client.cmds.size <= 1 ? "" : "s"} ont été chargé !`);
         })
     } catch (e) {
-        console.log(e);
+        client.error(e);
     }
 };
 

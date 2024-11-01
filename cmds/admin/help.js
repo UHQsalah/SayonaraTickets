@@ -5,6 +5,7 @@ module.exports = {
     type: 1,
     go: async (client, db, config, interaction, args) => {
         if (!db.get(`Owner_${interaction.guild.id}-${interaction.user.id}`) && !db.get(`Wl_${interaction.guild.id}-${interaction.user.id}`) && !config.owners.includes(interaction.user.id) && interaction.user.id !== interaction.guild.ownerId) return interaction.reply({ content: `\`❌\` *Vous n'avez pas les permission pour executé cette commande*`, ephemeral: true });
+        client.info(`${interaction.user.tag} (${interaction.user.id}) => /help`)
         await interaction.deferReply();
         const prevButton = client.button().setLabel("Prev").setCustomId("prev").setStyle(1);
         const nextButton = client.button().setLabel("Next").setCustomId("next").setStyle(3);
@@ -21,17 +22,7 @@ module.exports = {
             const tCommands = client.cmds.filter((cmd) => cmd.class === cat);
             const category = {
                 admin: "`🔰` Commandes Admin",
-                blacklist: "`🎎` Commandes Blacklist",
-                blrank: "`🧧` Commandes Blrank",
-                limitrole: "`📇` Commandes Limitrole",
-                voicemaster: "`🔊` Commandes Voice Master",
-                dog: "`🐕` Commandes Dog",
-                punish: "`⚖️` Commandes Punish",
-                antistats: "`📈` Commandes Stats",
-                watcher: "`🥽` Commandes watcher",
-                gestion: "`🎩` Commandes gestion",
-                giveaways: "`🎉` Commandes Giveaways",
-                logs: "`📰` Commandes Logs"
+                ticket: "`🎎` Commandes Ticket"
             };
             embed.setTitle(`${category[cat.toLowerCase()]} :`);
             embed.setDescription(tCommands.map((cmd) => "`=> /" + cmd.name + " - " + cmd.description + "`").join("\n"));

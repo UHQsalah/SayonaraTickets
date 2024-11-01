@@ -18,6 +18,7 @@ module.exports = {
             if (!interaction.channel.topic) {
                 return interaction.reply({ content: "Ce n'est pas un salon de ticket.", ephemeral: true });
             }
+            client.info(`${interaction.user.tag} (${interaction.user.id}) => /claim`)
 
             const userId = interaction.channel.topic;
             const memberToClaim = await interaction.guild.members.fetch(userId).catch(() => null);
@@ -60,7 +61,7 @@ module.exports = {
             });
 
         } catch (error) {
-            console.log('Une erreur est survenue lors de l\'exécution de la commande /claim :', error);
+            client.error(error);
             return interaction.reply({ content: "Une erreur s'est produite lors de la réclamation du ticket.", ephemeral: true });
         }
     },

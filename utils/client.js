@@ -11,6 +11,7 @@ const {
     StringSelectMenuBuilder,
     AttachmentBuilder
 } = require("discord.js");
+const consola = require('consola')
 class client extends Client {
     constructor() {
         super({
@@ -45,6 +46,29 @@ class client extends Client {
             ATTACHMENT: 11,
         };
     };
+    box(...args) {
+        consola.box(...args)
+    }
+
+    success(...args) {
+        consola.success(...args)
+    }
+
+    info(...args) {
+        consola.info(...args);
+    }
+
+    warn(...args) {
+        consola.warn(...args);
+    }
+
+    start(...args) {
+        consola.start(...args);
+    }
+
+    error(...args) {
+        consola.error(...args);
+    }
 
     async go() {
         this.login(this.config.token).catch(() => {
@@ -56,6 +80,7 @@ class client extends Client {
         const embed = new EmbedBuilder();
         return embed
     };
+    
 
     row() {
         return new ActionRowBuilder()
@@ -82,12 +107,20 @@ class client extends Client {
     }
 };
 process.on("unhandledRejection", (reason, p) => {
-    console.log(reason, p);
+  if (reason.code === 0) return; 
+  if (reason.code === 400) return;
+  if (reason.code == 10062) return; 
+  if (reason.code == 10008) return; 
+  if (reason.code === 50035) return; 
+  if (reason.code === 40032) return; 
+  if (reason.code ==  50013) return; 
+  if (reason.message.includes("Temp env not set")) return; 
+  if (reason.message.includes('no such file or director')) return; 
+  if (reason.message.includes("getaddrinfo ENOTFOUND null")) return; 
+    consola.error(reason, p);
 });
 process.on("uncaughtException", (err, origin) => {
-    console.log(err, origin);
+    consola.error(err, origin);
 });
-process.on("multipleResolves", (type, promise, reason) => {
-    console.log(type, promise, reason);
-});
+
 module.exports = client

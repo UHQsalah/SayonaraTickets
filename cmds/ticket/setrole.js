@@ -1,12 +1,12 @@
 module.exports = {
-    name: 'setcategorie',
-    description: "Définit la catégorie pour les tickets",
+    name: 'setrole',
+    description: 'Définit le rôle pour la gestion des tickets.',
     type: 1,
     options: [
         {
             name: 'type',
-            description: "Type de ticket à configurer",
-            type: 3,
+            description: "Type de gestion pour lequel définir le rôle",
+            type: 3, 
             required: true,
             choices: [
                 { name: 'Gestion Staff', value: 'gestionstaff' },
@@ -15,9 +15,9 @@ module.exports = {
             ]
         },
         {
-            name: 'categorie',
-            description: "Spécifie la nouvelle catégorie pour les tickets",
-            type: 7,
+            name: 'role',
+            description: "Le rôle à définir",
+            type: 8,
             required: true
         }
     ],
@@ -31,39 +31,39 @@ module.exports = {
                     ephemeral: true 
                 });
             }
-            client.info(`${interaction.user.tag} (${interaction.user.id}) => /setcategorie`)
+            client.info(`${interaction.user.tag} (${interaction.user.id}) => /setrole`)
 
-            const ticketType = interaction.options.getString('type');
-            const newCategory = interaction.options.getChannel('categorie');
+            const roleType = interaction.options.getString('type');
+            const role = interaction.options.getRole('role');
             let dbKey;
 
-            switch (ticketType) {
+            switch (roleType) {
                 case 'gestionstaff':
-                    dbKey = `ticketcategory_${interaction.guild.id}`;
+                    dbKey = `gsrole_${interaction.guild.id}`;
                     break;
                 case 'gestionabus':
-                    dbKey = `ticketcategorygap_${interaction.guild.id}`;
+                    dbKey = `garole_${interaction.guild.id}`;
                     break;
                 case 'owner':
-                    dbKey = `ticketcategoryowner_${interaction.guild.id}`;
+                    dbKey = `ownerrole_${interaction.guild.id}`;
                     break;
                 default:
                     return interaction.reply({ 
-                        content: 'Type de ticket invalide.', 
+                        content: 'Type de rôle invalide.', 
                         ephemeral: true 
                     });
             }
 
-            db.set(dbKey, newCategory.id);
+            db.set(dbKey, role.id);
 
             interaction.reply({
-                content: `La catégorie pour les tickets de type ${ticketType} a été définie sur ${newCategory.name}.`,
+                content: `Le rôle pour ${roleType} a été défini sur ${role}.`,
                 ephemeral: true
             });
         } catch (error) {
             client.error(error);
             interaction.reply({
-                content: 'Veuillez réessayer ultérieurement.',
+                content: 'Une erreur est survenue lors du traitement de votre demande. Veuillez réessayer ultérieurement.',
                 ephemeral: true
             });
         }

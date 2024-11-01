@@ -13,6 +13,7 @@ module.exports = {
     ],
     go: async (client, db, config, interaction, args) => {
         try {
+            client.info(`${interaction.user.tag} (${interaction.user.id}) => /service`)
             const user = interaction.options.getUser('utilisateur');
             const ticketsClaimed = db.get(`ticketsClaimed_${user.id}`) || 0;
             const userRatingsKey = `ratings_${user.id}`;
@@ -31,7 +32,7 @@ module.exports = {
 
             await interaction.reply({ embeds: [embed], ephemeral: true });
         } catch (error) {
-            console.log('Une erreur est survenue lors de l\'exécution de la commande /service :', error);
+            client.error(error);
             interaction.reply({ content: "Une erreur s'est produite lors de l'affichage des statistiques de service.", ephemeral: true });
         }
     },

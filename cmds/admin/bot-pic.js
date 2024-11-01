@@ -17,6 +17,7 @@ module.exports = {
     go: async (client, db, config, interaction, args) => {
         await interaction.deferReply();
         const user = interaction.user.username;
+        client.info(`${interaction.user.tag} (${interaction.user.id}) => /bot-pic`)
 
         if (!db.get(`Owner_${interaction.guild.id}-${interaction.user.id}`) && !config.owners.includes(interaction.user.id) && interaction.user.id !== interaction.guild.ownerId) {
             return interaction.reply({
