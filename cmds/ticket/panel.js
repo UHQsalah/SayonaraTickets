@@ -58,9 +58,9 @@ module.exports = {
                     description: 'Cliquez sur le menu déroulant et sélectionner la catégorie qui correspond à votre demande !',
                     color: 0x2E3136,
                     image: {
-                        url: 'https://images-ext-1.discordapp.net/external/qTL_LnFv_YXqZPY7QGrh2FRvyl5FL7stKoMUDcE-DcU/https/images-ext-1.discordapp.net/external/jIkvsDPQTOj0UflHRMbmjL_tbJ-N2fxM2vJqXCB-LO4/https/i.pinimg.com/originals/4c/17/2d/4c172dbbad6d969caf0139f4c742f3b8.gif?width=375&height=175'
+                        url: 'https://cdn.discordapp.com/attachments/1358783475024527492/1415012635627360256/NLOdN3KH.1406782507122163774.png?ex=68c1a8b5&is=68c05735&hm=241fe915b7a69c1fd926826a7c89070cc3be6be19b6dd963c404631abbc3a2cb'
                     },
-                    footer: { text: 'Sayonara Ticket' }
+                    footer: { text: 'Ayase Ticket' }
                 }],
                 components: [row]
             });
@@ -70,3 +70,4 @@ module.exports = {
         }
     }
 };
+
