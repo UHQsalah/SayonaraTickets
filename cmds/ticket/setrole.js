@@ -42,7 +42,7 @@ module.exports = {
                     dbKey = `gsrole_${interaction.guild.id}`;
                     break;
                 case 'gestionabus':
-                    dbKey = `garole_${interaction.guild.id}`;
+                    dbKey = `gaprole_${interaction.guild.id}`;
                     break;
                 case 'owner':
                     dbKey = `ownerrole_${interaction.guild.id}`;
@@ -69,3 +69,4 @@ module.exports = {
         }
     }
 };
+
